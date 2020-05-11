@@ -14,6 +14,10 @@ class Configuration {
     this._root = root;
   }
 
+  get root() {
+    return this._root;
+  }
+
   async load(value) {
     this._root = await this._load(value);
   }
