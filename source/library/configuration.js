@@ -14,6 +14,10 @@ class Configuration {
     this._root = root
   }
 
+  get root() {
+    return this._root
+  }
+
   async load(value) {
     this._root = await this._load(value)
   }
@@ -37,7 +41,7 @@ class Configuration {
         module = await import(path)
         module = module.default ? module.default : module
 
-        return module
+        return Is.function(module) ? module(this) : module
 
       }
 
