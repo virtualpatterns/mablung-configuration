@@ -1,2 +1,4 @@
-export default { 'b': 2 };
+export default function () {
+  return { 'b': 2 };
+}
 //# sourceMappingURL=load1.js.map
