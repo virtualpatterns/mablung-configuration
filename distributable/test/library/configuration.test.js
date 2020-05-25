@@ -19,12 +19,13 @@ Test('Configuration.load(object)', async test => {
 });
 
 [
-['load0.js', 'load1.js'],
-['load0.json', 'load1.json'],
-['load0.json5', 'load1.json5']].
+// [ 'load0.js', 'load1.js' ],
+// [ 'load0.json', 'load1.json' ],
+// [ 'load0.json5', 'load1.json5' ],
+['load2.js', 'load3.js']].
 forEach(([loadFileName0, loadFileName1]) => {
 
-  Test(`Configuration.load('${loadFileName0}'), Configuration.load('${loadFileName1}')`, async test => {
+  Test.only(`Configuration.load('${loadFileName0}'), Configuration.load('${loadFileName1}')`, async test => {
 
     let configuration = new Configuration();
     await configuration.load(Require.resolve(`./resource/configuration/load/path/${loadFileName0}`));
