@@ -5,12 +5,7 @@ import { Configuration } from '../../index.js'
 const Require = __require // __require is replaced by @virtualpatterns/mablung-babel-plugin-replace
 
 Test('Configuration(object)', (test) => {
-
-  let configuration = new Configuration({ 'a': 1 })
-  let value = configuration.get('a')
-
-  test.is(value, 1, 'value of \'a\' is not 1')
-
+  test.is((new Configuration({ 'a': 1 })).get('a'), 1)
 })
 
 Test('Configuration.load(object)', async (test) => {
@@ -18,18 +13,16 @@ Test('Configuration.load(object)', async (test) => {
   let configuration = new Configuration({ 'a': 1 })
   await configuration.load({ 'b' : 2 })
 
-  let hasValue = configuration.has('a')
-  let value = configuration.get('b')
-
-  test.false(hasValue, '\'a\' exists')
-  test.is(value, 2, 'value of \'b\' is not 2')
+  test.false(configuration.has('a'))
+  test.is(configuration.get('b'), 2)
 
 })
 
 ;[
   [ 'load0.js', 'load1.js' ],
   [ 'load0.json', 'load1.json' ],
-  [ 'load0.json5', 'load1.json5' ]
+  [ 'load0.json5', 'load1.json5' ],
+  [ 'load2.js', 'load3.js' ]
 ].forEach(([ loadFileName0, loadFileName1 ]) => {
 
   Test(`Configuration.load('${loadFileName0}'), Configuration.load('${loadFileName1}')`, async (test) => {
@@ -37,12 +30,9 @@ Test('Configuration.load(object)', async (test) => {
     let configuration = new Configuration()
     await configuration.load(Require.resolve(`./resource/configuration/load/path/${loadFileName0}`))
     await configuration.load(Require.resolve(`./resource/configuration/load/path/${loadFileName1}`))
-
-    let hasValue = configuration.has('a')
-    let value = configuration.get('b')
   
-    test.false(hasValue, '\'a\' exists')
-    test.is(value, 2, 'value of \'b\' is not 2')
+    test.false(configuration.has('a'))
+    test.is(configuration.get('b'), 2)
   
   })
 
@@ -53,11 +43,8 @@ Test('Configuration.merge(object)', async (test) => {
   let configuration = new Configuration({ 'a': 1 })
   await configuration.merge({ 'b' : 2 })
 
-  let value0 = configuration.get('a')
-  let value1 = configuration.get('b')
-
-  test.is(value0, 1, 'value of \'a\' is not 1')
-  test.is(value1, 2, 'value of \'b\' is not 2')
+  test.is(configuration.get('a'), 1)
+  test.is(configuration.get('b'), 2)
 
 })
 
@@ -72,12 +59,9 @@ Test('Configuration.merge(object)', async (test) => {
     let configuration = new Configuration()
     await configuration.load(Require.resolve(`./resource/configuration/merge/path/${loadFileName}`))
     await configuration.merge(Require.resolve(`./resource/configuration/merge/path/${mergeFileName}`))
-
-    let value0 = configuration.get('a')
-    let value1 = configuration.get('b')
   
-    test.is(value0, 1, 'value of \'a\' is not 1')
-    test.is(value1, 2, 'value of \'b\' is not 2')
+    test.is(configuration.get('a'), 1)
+    test.is(configuration.get('b'), 2)
   
   })
 
@@ -85,25 +69,16 @@ Test('Configuration.merge(object)', async (test) => {
 })
 
 Test('Configuration.has(string)', (test) => {
-
-  let configuration = new Configuration({ 'a': 1 })
-  let hasValue = configuration.has('a')
-
-  test.true(hasValue, '\'a\' does not exist')
-
+  test.true((new Configuration({ 'a': 1 })).has('a'))
 })
 
 Test('Configuration.get(string[, defaultValue])', (test) => {
 
   let configuration = new Configuration({ 'a': 1 })
 
-  let value0 = configuration.get('a')
-  let value1 = configuration.get('b', 0)
-  let value2 = configuration.get('c')
-
-  test.is(value0, 1, 'value of \'a\' is not 1')
-  test.is(value1, 0, 'value of \'b\' is not 0')
-  test.is(value2, undefined, 'value of \'c\' is not undefined')
+  test.is(configuration.get('a'), 1)
+  test.is(configuration.get('b', 0), 0)
+  test.is(configuration.get('c'), undefined)
 
 })
 
@@ -112,9 +87,7 @@ Test('Configuration.set(string, value)', (test) => {
   let configuration = new Configuration({ 'a': 1 })
   configuration.set('b', 2)
 
-  let value0 = configuration.get('b', 0)
-
-  test.is(value0, 2, 'value of \'b\' is not 2')
+  test.is(configuration.get('b', 0), 2)
 
 })
 
@@ -126,9 +99,9 @@ Test('Configuration.getOption(option0, option1, option2)', (test) => {
 
   let option4 = Configuration.getOption(option0, option1, option2)
 
-  test.false(option4.a, 'value of \'a\' is not false')
-  test.is(option4.b, 2, 'value of \'b\' is not 2')
-  test.is(option4.c, 3, 'value of \'c\' is not 3')
+  test.false(option4.a)
+  test.is(option4.b, 2)
+  test.is(option4.c, 3)
 
 })
 
@@ -141,7 +114,7 @@ Test('Configuration.getParameter(parameter0, parameter1, parameter2)', (test) =>
   let actualValue = Configuration.getParameter(parameter0, parameter1, parameter2)
   let expectedValue = [ 'a', '1', 'b', 'c', '5', 'd', '4' ]
 
-  test.is(actualValue.length, 7, 'parameter length is not 7')
+  test.is(actualValue.length, 7)
   test.deepEqual(actualValue, expectedValue)
 
 })

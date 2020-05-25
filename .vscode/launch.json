@@ -10,7 +10,7 @@
       "name": "Launch ...",
       "internalConsoleOptions": "openOnSessionStart",
       "preLaunchTask": "build",
-      "program": "${workspaceFolder}/distributable/sandbox/fork.js",
+      "program": "${workspaceFolder}/distributable/sandbox/l.js",
       "runtimeArgs": [],
       "skipFiles": [ "<node_internals>/**" ]
     },
@@ -24,7 +24,8 @@
       "preLaunchTask": "build",
       "runtimeArgs": [
         "debug",
-        "--break"
+        "--break",
+        "${workspaceFolder}/distributable/test/library/configuration.test.js"
       ],
       "runtimeExecutable": "${workspaceFolder}/node_modules/.bin/ava",
       "skipFiles": [

@@ -1,7 +1,7 @@
 import Clone from 'clone'
 import FileSystem from 'fs'
 import FileSystemPath from 'path'
-import Is from '@pwn/is'
+import { Is } from '@virtualpatterns/mablung-is'
 import JSON5 from 'json5'
 import Merge from 'deepmerge'
 import ObjectPath from 'object-path'
@@ -41,7 +41,17 @@ class Configuration {
         module = await import(path)
         module = module.default ? module.default : module
 
-        return Is.function(module) ? module(this) : module
+        if (Is.functionOrAsyncFunction(module)) {
+
+          let returnValue = null
+          returnValue = module(this)
+          returnValue = returnValue instanceof Promise ? await returnValue : returnValue
+
+          return returnValue
+
+        } else {
+          return module
+        }
 
       }
 
