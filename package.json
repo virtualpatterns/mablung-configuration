@@ -23,8 +23,8 @@
     ]
   },
   "description": "TBD",
+  "exports": "./distributable/index.js",
   "license": "GPL-3.0+",
-  "main": "distributable/index.js",
   "name": "@virtualpatterns/mablung-configuration",
   "repository": {
     "type": "git",
