@@ -57,7 +57,7 @@
     "push": "run-s --silent test push:*"
   },
   "type": "module",
-  "version": "0.0.2-3",
+  "version": "0.0.2-4",
   "devDependencies": {
     "@babel/cli": "^7.10.1",
     "@babel/core": "^7.10.2",
