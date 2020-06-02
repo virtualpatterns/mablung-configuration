@@ -5,6 +5,7 @@ import { Is } from '@virtualpatterns/mablung-is'
 import JSON5 from 'json5'
 import Merge from 'deepmerge'
 import ObjectPath from 'object-path'
+import URL from 'url'
 
 const PATTERN_JSON = /^.+\.json5?$/i
 
@@ -38,7 +39,7 @@ class Configuration {
       else {
 
         let module = null
-        module = await import(path)
+        module = await import(URL.pathToFileURL(path))
         module = module.default ? module.default : module
 
         if (Is.functionOrAsyncFunction(module)) {
