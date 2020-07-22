@@ -114,7 +114,33 @@ Test('Configuration.getParameter(parameter0, parameter1, parameter2)', test => {
   let actualValue = Configuration.getParameter(parameter0, parameter1, parameter2);
   let expectedValue = ['a', '1', 'b', 'c', '5', 'd', '4'];
 
+  test.log(actualValue);
+
   test.is(actualValue.length, 7);
+  test.deepEqual(actualValue, expectedValue);
+
+});
+
+Test('Configuration.getParameter({ \'a\': 0 })', test => {
+
+  let parameter0 = { 'a': 0 };
+
+  let actualValue = Configuration.getParameter(parameter0);
+  let expectedValue = ['a', 0];
+
+  test.is(actualValue.length, 2);
+  test.deepEqual(actualValue, expectedValue);
+
+});
+
+Test('Configuration.getParameter({ \'a\': 1 })', test => {
+
+  let parameter0 = { 'a': 1 };
+
+  let actualValue = Configuration.getParameter(parameter0);
+  let expectedValue = ['a', 1];
+
+  test.is(actualValue.length, 2);
   test.deepEqual(actualValue, expectedValue);
 
 });
