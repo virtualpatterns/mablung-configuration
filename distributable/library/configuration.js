@@ -107,24 +107,10 @@ class Configuration {
   static _parameterObjectToArray(value) {
     // Convert a parameter object { 'a': true, 'b': false, 'c': 'abc', 'd': 1, 'e': 0 }
     // into an array [ 'a', 'c', 'abc', 'd', 1, 'e', 0 ]
-
-
     return Object.entries(value) // returns [ [ name, value ], [ name, value ], ... ]
     .filter(([, value]) => Is.boolean(value) ? value : true) // if value is a boolean, filter out false values
     .map(([name, value]) => Is.boolean(value) ? [name] : [name, value]) // if value is a boolean return only [ name ]
     .flat();
-
-    // return Object.keys(value)
-    //   .filter((name) => Is.boolean(value[name]) ? value[name] : true) // remove any name/value pairs where value is false
-    //   .map((name) => {
-
-    //     Is.string(value[name]) {
-    //       return [ name, value[name] ]
-    //     }
-    //      : name
-    //   }) // separate name/value pairs into [ name, value ] or just name if it's not a string
-    //   .flat()
-
   }
 
   static redact(value, path, censor = '**********') {
