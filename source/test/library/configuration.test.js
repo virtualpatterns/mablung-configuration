@@ -1,7 +1,10 @@
+import Path from 'path'
 import Test from 'ava'
 
 import { Configuration } from '../../index.js'
 
+const FilePath = __filePath
+const FolderPath = Path.dirname(FilePath)
 const Require = __require // __require is replaced by @virtualpatterns/mablung-babel-plugin-replace
 
 Test('Configuration(object)', (test) => {
@@ -19,17 +22,17 @@ Test('Configuration.load(object)', async (test) => {
 })
 
 ;[
-  [ 'load0.js', 'load1.js' ],
-  [ 'load0.json', 'load1.json' ],
-  [ 'load0.json5', 'load1.json5' ],
-  [ 'load2.js', 'load3.js' ]
+  [ Require.resolve('./resource/configuration/load/path/load0.js'), Require.resolve('./resource/configuration/load/path/load1.js') ],
+  [ Require.resolve('./resource/configuration/load/path/load0.json'), Require.resolve('./resource/configuration/load/path/load1.json') ],
+  [ Require.resolve('./resource/configuration/load/path/load0.json5'), Require.resolve('./resource/configuration/load/path/load1.json5') ],
+  [ Require.resolve('./resource/configuration/load/path/load2.js'), Require.resolve('./resource/configuration/load/path/load3.js') ]
 ].forEach(([ loadFileName0, loadFileName1 ]) => {
 
-  Test(`Configuration.load('${loadFileName0}'), Configuration.load('${loadFileName1}')`, async (test) => {
+  Test.only(`Configuration.load('${Path.relative(Path.dirname(loadFileName0), loadFileName0)}'), Configuration.load('${Path.relative(Path.dirname(loadFileName1), loadFileName1)}')`, async (test) => {
 
     let configuration = new Configuration()
-    await configuration.load(Require.resolve(`./resource/configuration/load/path/${loadFileName0}`))
-    await configuration.load(Require.resolve(`./resource/configuration/load/path/${loadFileName1}`))
+    await configuration.load(loadFileName0)
+    await configuration.load(loadFileName1)
   
     test.false(configuration.has('a'))
     test.is(configuration.get('b'), 2)
@@ -49,16 +52,16 @@ Test('Configuration.merge(object)', async (test) => {
 })
 
 ;[
-  [ 'load.js', 'merge.js' ],
-  [ 'load.json', 'merge.json' ],
-  [ 'load.json5', 'merge.json5' ]
+  [ Require.resolve('./resource/configuration/merge/path/load.js'), Require.resolve('./resource/configuration/merge/path/merge.js') ],
+  [ Require.resolve('./resource/configuration/merge/path/load.json'), Require.resolve('./resource/configuration/merge/path/merge.json') ],
+  [ Require.resolve('./resource/configuration/merge/path/load.json5'), Require.resolve('./resource/configuration/merge/path/merge.json5') ]
 ].forEach(([ loadFileName, mergeFileName ]) => {
 
-  Test(`Configuration.load('${loadFileName}'), Configuration.merge('${mergeFileName}')`, async (test) => {
+  Test.only(`Configuration.load('${Path.relative(Path.dirname(loadFileName), loadFileName)}'), Configuration.merge('${Path.relative(Path.dirname(mergeFileName), mergeFileName)}')`, async (test) => {
 
     let configuration = new Configuration()
-    await configuration.load(Require.resolve(`./resource/configuration/merge/path/${loadFileName}`))
-    await configuration.merge(Require.resolve(`./resource/configuration/merge/path/${mergeFileName}`))
+    await configuration.load(loadFileName)
+    await configuration.merge(mergeFileName)
   
     test.is(configuration.get('a'), 1)
     test.is(configuration.get('b'), 2)

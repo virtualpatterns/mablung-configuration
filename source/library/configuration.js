@@ -39,16 +39,16 @@ class Configuration {
       else {
 
         let module = null
-        module = await import(URL.pathToFileURL(path))
-        module = module.default ? module.default : module
+        module = await import(path) // URL.pathToFileURL(path))
+        module = module.default || module
 
         if (Is.functionOrAsyncFunction(module)) {
 
-          let returnValue = null
-          returnValue = module(this)
-          returnValue = returnValue instanceof Promise ? await returnValue : returnValue
+          // let returnValue = null
+          // returnValue = module(this)
+          // returnValue = returnValue instanceof Promise ? await returnValue : returnValue
 
-          return returnValue
+          return await module(this) // returnValue
 
         } else {
           return module

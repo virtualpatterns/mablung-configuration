@@ -5,9 +5,9 @@ import { Configuration } from '../library/configuration'
 
   try {
 
-    let configuration = new Configuration(`${__dirname}/configuration/c.json5`)
+    let configuration = new Configuration()
 
-    configuration.merge({ 'logLevel': 'trace' })
+    configuration.merge('')
 
     console.log(configuration.has('unquoted'))
     console.log(configuration.get('unquoted'))

@@ -1,1 +1,0 @@
-{"version":3,"sources":["../../../../../../../source/test/library/resource/configuration/load/path/load1.js"],"names":[],"mappings":"AAAA,eAAe,YAAW;AACxB,SAAO,EAAE,KAAK,CAAP,EAAP;AACD","sourcesContent":["export default function() {\n  return { 'b': 2 }\n}\n"],"file":"load1.js"}
