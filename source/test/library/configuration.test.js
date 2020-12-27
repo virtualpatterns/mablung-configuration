@@ -3,8 +3,8 @@ import Test from 'ava'
 
 import { Configuration } from '../../index.js'
 
-const FilePath = __filePath
-const FolderPath = Path.dirname(FilePath)
+// const FilePath = __filePath
+// const FolderPath = Path.dirname(FilePath)
 const Require = __require // __require is replaced by @virtualpatterns/mablung-babel-plugin-replace
 
 Test('Configuration(object)', (test) => {

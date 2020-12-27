@@ -5,7 +5,7 @@ import { Is } from '@virtualpatterns/mablung-is'
 import JSON5 from 'json5'
 import Merge from 'deepmerge'
 import ObjectPath from 'object-path'
-import URL from 'url'
+// import URL from 'url'
 
 const PATTERN_JSON = /^.+\.json5?$/i
 
