@@ -28,7 +28,7 @@ const Require = require; // __require is replaced by @virtualpatterns/mablung-ba
   test.is(configuration.get('b'), 2);
 });
 [[Require.resolve("./resource/configuration/load/path/load0.cjs"), Require.resolve("./resource/configuration/load/path/load1.cjs")], [Require.resolve('./resource/configuration/load/path/load0.json'), Require.resolve('./resource/configuration/load/path/load1.json')], [Require.resolve('./resource/configuration/load/path/load0.json5'), Require.resolve('./resource/configuration/load/path/load1.json5')], [Require.resolve("./resource/configuration/load/path/load2.cjs"), Require.resolve("./resource/configuration/load/path/load3.cjs")]].forEach(([loadFileName0, loadFileName1]) => {
-  _ava.default.only(`Configuration.load('${_path.default.relative(_path.default.dirname(loadFileName0), loadFileName0)}'), Configuration.load('${_path.default.relative(_path.default.dirname(loadFileName1), loadFileName1)}')`, async test => {
+  (0, _ava.default)(`Configuration.load('${_path.default.relative(_path.default.dirname(loadFileName0), loadFileName0)}'), Configuration.load('${_path.default.relative(_path.default.dirname(loadFileName1), loadFileName1)}')`, async test => {
     let configuration = new _index.Configuration();
     await configuration.load(loadFileName0);
     await configuration.load(loadFileName1);
@@ -47,7 +47,7 @@ const Require = require; // __require is replaced by @virtualpatterns/mablung-ba
   test.is(configuration.get('b'), 2);
 });
 [[Require.resolve("./resource/configuration/merge/path/load.cjs"), Require.resolve("./resource/configuration/merge/path/merge.cjs")], [Require.resolve('./resource/configuration/merge/path/load.json'), Require.resolve('./resource/configuration/merge/path/merge.json')], [Require.resolve('./resource/configuration/merge/path/load.json5'), Require.resolve('./resource/configuration/merge/path/merge.json5')]].forEach(([loadFileName, mergeFileName]) => {
-  _ava.default.only(`Configuration.load('${_path.default.relative(_path.default.dirname(loadFileName), loadFileName)}'), Configuration.merge('${_path.default.relative(_path.default.dirname(mergeFileName), mergeFileName)}')`, async test => {
+  (0, _ava.default)(`Configuration.load('${_path.default.relative(_path.default.dirname(loadFileName), loadFileName)}'), Configuration.merge('${_path.default.relative(_path.default.dirname(mergeFileName), mergeFileName)}')`, async test => {
     let configuration = new _index.Configuration();
     await configuration.load(loadFileName);
     await configuration.merge(mergeFileName);

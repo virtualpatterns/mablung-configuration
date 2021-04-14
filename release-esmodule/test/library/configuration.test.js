@@ -28,7 +28,7 @@ Test('Configuration.load(object)', async test => {
 [Require.resolve('./resource/configuration/load/path/load2.js'), Require.resolve('./resource/configuration/load/path/load3.js')]].
 forEach(([loadFileName0, loadFileName1]) => {
 
-  Test.only(`Configuration.load('${Path.relative(Path.dirname(loadFileName0), loadFileName0)}'), Configuration.load('${Path.relative(Path.dirname(loadFileName1), loadFileName1)}')`, async test => {
+  Test(`Configuration.load('${Path.relative(Path.dirname(loadFileName0), loadFileName0)}'), Configuration.load('${Path.relative(Path.dirname(loadFileName1), loadFileName1)}')`, async test => {
 
     let configuration = new Configuration();
     await configuration.load(loadFileName0);
@@ -57,7 +57,7 @@ Test('Configuration.merge(object)', async test => {
 [Require.resolve('./resource/configuration/merge/path/load.json5'), Require.resolve('./resource/configuration/merge/path/merge.json5')]].
 forEach(([loadFileName, mergeFileName]) => {
 
-  Test.only(`Configuration.load('${Path.relative(Path.dirname(loadFileName), loadFileName)}'), Configuration.merge('${Path.relative(Path.dirname(mergeFileName), mergeFileName)}')`, async test => {
+  Test(`Configuration.load('${Path.relative(Path.dirname(loadFileName), loadFileName)}'), Configuration.merge('${Path.relative(Path.dirname(mergeFileName), mergeFileName)}')`, async test => {
 
     let configuration = new Configuration();
     await configuration.load(loadFileName);
