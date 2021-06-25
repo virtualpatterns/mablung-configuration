@@ -1,0 +1,1 @@
+{"version":3,"sources":["../../../../../../../../source/esmodule/test/library/resource/configuration/merge/path/merge.js"],"names":[],"mappings":";;;;;;eAAe;AAAE,OAAK;AAAP,C","file":"merge.cjs","sourcesContent":["export default { 'b': 2 }"]}

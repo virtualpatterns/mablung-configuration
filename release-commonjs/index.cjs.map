@@ -1,1 +1,0 @@
-{"version":3,"sources":["../source/index.js"],"names":[],"mappings":";;;;;;AAAA;;AAAA;AAAA;AAAA;AAAA;AAAA;AAAA;AAAA;AAAA;AAAA;AAAA","sourcesContent":["export * from './library/configuration.js'"],"file":"index.cjs"}

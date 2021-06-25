@@ -1,0 +1,1 @@
+{"version":3,"sources":["../../../source/esmodule/sandbox/ta.js"],"names":[],"mappings":"AAAA,eAAe,EAAE,KAAK,CAAP,EAAf","file":"ta.js","sourcesContent":["export default { 'a': 1 }"]}

@@ -1,0 +1,1 @@
+{"version":3,"sources":["../../../../source/esmodule/sandbox/configuration/r.js"],"names":[],"mappings":"AAAA,MAAM,CAAC,OAAP,GAAiB,EAAE,KAAK,CAAP,EAAjB","file":"r.js","sourcesContent":["module.exports = { 'a': 1 }"]}
