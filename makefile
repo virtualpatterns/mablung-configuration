@@ -1,9 +1,13 @@
 
-ifeq ($(origin projectPath),undefined)
-export projectPath := $(CURDIR)
+ifeq ($(origin project-path),undefined)
+export project-path := $(CURDIR)
 endif
 
-include $(projectPath)/node_modules/@virtualpatterns/mablung-makefile-environment/makefile
+ifeq ($(origin mablung-makefile-environment-path),undefined)
+export mablung-makefile-environment-path := $(shell npx mablung-makefile-environment-path)
+endif
+
+include $(mablung-makefile-environment-path)
 
 # "scripts": {
 #   "refresh": "rm -Rf node_modules package-lock.json && npm install",
