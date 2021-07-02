@@ -1,1 +1,0 @@
-{"version":3,"sources":["../../source/esmodule/index.js"],"names":[],"mappings":"AAAA,cAAc,4BAAd","file":"index.js","sourcesContent":["export * from './library/configuration.js'"]}
