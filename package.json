@@ -36,6 +36,12 @@
     },
     "./package.json": "./package.json"
   },
+  "files": [
+    "/release/commonjs/library",
+    "/release/commonjs/index.cjs",
+    "/release/esmodule/library",
+    "/release/esmodule/index.js"
+  ],
   "license": "GPL-3.0+",
   "main": "release/commonjs/index.cjs",
   "name": "@virtualpatterns/mablung-configuration",
@@ -48,6 +54,13 @@
   },
   "type": "module",
   "version": "0.0.2-19",
+  "dependencies": {
+    "@virtualpatterns/mablung-is": "0.0.1-23",
+    "clone": "^2.1.2",
+    "deepmerge": "^4.2.2",
+    "json5": "^2.2.0",
+    "object-path": "^0.11.5"
+  },
   "devDependencies": {
     "@babel/cli": "^7.14.5",
     "@babel/core": "^7.14.6",
@@ -55,23 +68,16 @@
     "@babel/plugin-syntax-import-meta": "^7.10.4",
     "@babel/preset-env": "^7.14.7",
     "@pwn/is": "^1.0.2",
-    "@virtualpatterns/mablung-babel-plugin-replace-identifier": "virtualpatterns/mablung-babel-plugin-replace-identifier.git",
-    "@virtualpatterns/mablung-babel-plugin-replace-string-literal": "virtualpatterns/mablung-babel-plugin-replace-string-literal",
-    "@virtualpatterns/mablung-check-dependency": "virtualpatterns/mablung-check-dependency",
-    "@virtualpatterns/mablung-makefile-environment": "virtualpatterns/mablung-makefile-environment",
-    "@virtualpatterns/mablung-source-map-support": "virtualpatterns/mablung-source-map-support.git",
+    "@virtualpatterns/mablung-babel-plugin-replace-identifier": "0.0.1-15",
+    "@virtualpatterns/mablung-babel-plugin-replace-string-literal": "0.0.1-13",
+    "@virtualpatterns/mablung-check-dependency": "0.0.1-45",
+    "@virtualpatterns/mablung-makefile-environment": "0.0.1-12",
+    "@virtualpatterns/mablung-source-map-support": "0.0.2-43",
     "ava": "^3.15.0",
     "c8": "^7.7.3",
     "eslint": "^7.29.0",
     "eslint-plugin-babel": "^5.3.1",
     "npm-check-updates": "^11.7.1",
     "shx": "^0.3.3"
-  },
-  "dependencies": {
-    "@virtualpatterns/mablung-is": "virtualpatterns/mablung-is.git",
-    "clone": "^2.1.2",
-    "deepmerge": "^4.2.2",
-    "json5": "^2.2.0",
-    "object-path": "^0.11.5"
   }
 }
