@@ -68,7 +68,7 @@
     "@virtualpatterns/mablung-babel-plugin-replace-identifier": "0.0.1-15",
     "@virtualpatterns/mablung-babel-plugin-replace-string-literal": "0.0.1-13",
     "@virtualpatterns/mablung-check-dependency": "0.0.1-45",
-    "@virtualpatterns/mablung-makefile-environment": "0.0.1-12",
+    "@virtualpatterns/mablung-makefile-environment": "0.0.1-19",
     "@virtualpatterns/mablung-source-map-support": "0.0.2-43",
     "ava": "^3.15.0",
     "c8": "^7.7.3",
