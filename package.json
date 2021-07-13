@@ -50,7 +50,7 @@
     "test": "make test"
   },
   "type": "module",
-  "version": "0.0.2-21",
+  "version": "0.0.2-22",
   "dependencies": {
     "@virtualpatterns/mablung-is": "0.0.1-26",
     "clone": "^2.1.2",
