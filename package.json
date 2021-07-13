@@ -18,15 +18,12 @@
     "all": true,
     "exclude": [
       "release/commonjs/sandbox",
-      "release/commonjs/test",
-      "release/esmodule/sandbox",
-      "release/esmodule/test",
-      "source/sandbox",
-      "source/test"
+      "release/esmodule/sandbox"
     ],
     "reporter": [
       "html"
-    ]
+    ],
+    "src": "release"
   },
   "description": "TBD",
   "exports": {
