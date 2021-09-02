@@ -5,7 +5,7 @@ import { Configuration } from '../../index.js'
 
 // const FilePath = __filePath
 // const FolderPath = Path.dirname(FilePath)
-const Require = __require // __require is replaced by @virtualpatterns/mablung-babel-plugin-replace
+const Require = __require // __require is replaced by @virtualpatterns/babel-plugin-mablung-replace
 
 Test('Configuration(object)', (test) => {
   test.is((new Configuration({ 'a': 1 })).get('a'), 1)
