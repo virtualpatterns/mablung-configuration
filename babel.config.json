@@ -5,8 +5,8 @@
       {
         "header": {
           "exclude": [
+            "source/**/test",
             "source/header",
-            "source/test",
             "source/index.js"
           ]
         }

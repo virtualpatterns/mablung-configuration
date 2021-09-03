@@ -1,11 +1,9 @@
-import Clone from 'clone'
-import FileSystem from 'fs'
-import FileSystemPath from 'path'
 import { Is } from '@virtualpatterns/mablung-is'
+import Clone from 'clone'
+import FileSystem from 'fs-extra'
+import Path from 'path'
 import Merge from 'deepmerge'
 import ObjectPath from 'object-path'
-
-const PATTERN_JSON = /^.+\.json5?$/i
 
 class Configuration {
 
@@ -18,39 +16,11 @@ class Configuration {
   }
 
   async load(value) {
-    this._root = await this._load(value)
+    this._root = await Configuration.load(value)
   }
 
   async merge(value) {
-    this._root = Configuration.merge(this._root, await this._load(value))
-  }
-
-  async _load(value) {
-
-    if (Is.string(value)) {
-
-      let path = FileSystemPath.resolve(value)
-
-      if (PATTERN_JSON.test(path)) {
-        return FileSystem.readJsonSync(path, { 'encoding': 'utf-8' })
-      }
-      else {
-
-        let module = null
-        module = await import(path)
-
-        if (Is.functionOrAsyncFunction(module)) {
-          return await module(this)
-        } else {
-          return module
-        }
-
-      }
-
-    } else {
-      return value
-    }
-
+    this._root = Configuration.merge(this._root, await Configuration.load(value))
   }
 
   has(...argument) {
@@ -63,6 +33,34 @@ class Configuration {
 
   set(...argument) {
     return ObjectPath.set.apply(ObjectPath, [ this._root, ...argument ])
+  }
+
+  static async load(value) {
+
+    if (Is.string(value)) {
+
+      let path = Path.resolve(value)
+
+      if (/^.+\.json5?$/i.test(path)) {
+        return FileSystem.readJson(path, { 'encoding': 'utf-8' })
+      }
+      else {
+
+        let module = await import(path)
+        let value = module.default
+
+        if (Is.functionOrAsyncFunction(value)) {
+          return value(this)
+        } else {
+          return value
+        }
+
+      }
+
+    } else {
+      return value
+    }
+
   }
 
   static merge(...argument) {

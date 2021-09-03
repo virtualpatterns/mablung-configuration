@@ -3,79 +3,95 @@ import Test from 'ava'
 
 import { Configuration } from '../../index.js'
 
-// const FilePath = __filePath
-// const FolderPath = Path.dirname(FilePath)
-const Require = __require // __require is replaced by @virtualpatterns/babel-plugin-mablung-replace
+const FilePath = __filePath
+const FolderPath = Path.dirname(FilePath)
+const Require = __require
 
-Test('Configuration(object)', (test) => {
+Test('Configuration()', (test) => {
+  test.false((new Configuration()).has('a'))
+})
+
+Test('Configuration({ ... })', (test) => {
   test.is((new Configuration({ 'a': 1 })).get('a'), 1)
 })
 
-Test('Configuration.load(object)', async (test) => {
+Test('load({ ... })', async (test) => {
 
-  let configuration = new Configuration({ 'a': 1 })
-  await configuration.load({ 'b' : 2 })
+  let configuration = null
+  configuration = new Configuration({ 'b': 2 })
+  await configuration.load({ 'a': 1 })
 
-  test.false(configuration.has('a'))
-  test.is(configuration.get('b'), 2)
-
-})
-
-;[
-  [ Require.resolve('./resource/configuration/load/path/load0.js'), Require.resolve('./resource/configuration/load/path/load1.js') ],
-  [ Require.resolve('./resource/configuration/load/path/load0.json'), Require.resolve('./resource/configuration/load/path/load1.json') ],
-  [ Require.resolve('./resource/configuration/load/path/load0.json5'), Require.resolve('./resource/configuration/load/path/load1.json5') ],
-  [ Require.resolve('./resource/configuration/load/path/load2.js'), Require.resolve('./resource/configuration/load/path/load3.js') ]
-].forEach(([ loadFileName0, loadFileName1 ]) => {
-
-  Test(`Configuration.load('${Path.relative(Path.dirname(loadFileName0), loadFileName0)}'), Configuration.load('${Path.relative(Path.dirname(loadFileName1), loadFileName1)}')`, async (test) => {
-
-    let configuration = new Configuration()
-    await configuration.load(loadFileName0)
-    await configuration.load(loadFileName1)
-  
-    test.false(configuration.has('a'))
-    test.is(configuration.get('b'), 2)
-  
-  })
-
-})
-
-Test('Configuration.merge(object)', async (test) => {
-
-  let configuration = new Configuration({ 'a': 1 })
-  await configuration.merge({ 'b' : 2 })
-
+  test.false(configuration.has('b'))
   test.is(configuration.get('a'), 1)
-  test.is(configuration.get('b'), 2)
 
 })
 
 ;[
-  [ Require.resolve('./resource/configuration/merge/path/load.js'), Require.resolve('./resource/configuration/merge/path/merge.js') ],
-  [ Require.resolve('./resource/configuration/merge/path/load.json'), Require.resolve('./resource/configuration/merge/path/merge.json') ],
-  [ Require.resolve('./resource/configuration/merge/path/load.json5'), Require.resolve('./resource/configuration/merge/path/merge.json5') ]
-].forEach(([ loadFileName, mergeFileName ]) => {
+  Require.resolve('./resource/load.json'),
+  Require.resolve('./resource/load-0.js'),
+  Require.resolve('./resource/load-1.js'),
+  Require.resolve('./resource/load-2.js'),
+  Require.resolve('./resource/load-3.js'),
+  Require.resolve('./resource/load-4.cjs'),
+  Require.resolve('./resource/load-5.cjs'),
+  Require.resolve('./resource/load-6.cjs'),
+  Require.resolve('./resource/load-7.cjs')
+].forEach((path) => {
 
-  Test(`Configuration.load('${Path.relative(Path.dirname(loadFileName), loadFileName)}'), Configuration.merge('${Path.relative(Path.dirname(mergeFileName), mergeFileName)}')`, async (test) => {
+  Test(`load('${Path.relative(FolderPath, path)}')`, async (test) => {
 
-    let configuration = new Configuration()
-    await configuration.load(loadFileName)
-    await configuration.merge(mergeFileName)
-  
+    let configuration = null
+    configuration = new Configuration({ 'b': 2 })
+    await configuration.load(path)
+
+    test.false(configuration.has('b'))
     test.is(configuration.get('a'), 1)
-    test.is(configuration.get('b'), 2)
-  
-  })
 
+  })
 
 })
 
-Test('Configuration.has(string)', (test) => {
+Test('merge({ ... })', async (test) => {
+
+  let configuration = null
+  configuration = new Configuration({ 'b': 2 })
+  await configuration.merge({ 'a': 1 })
+
+  test.is(configuration.get('b'), 2)
+  test.is(configuration.get('a'), 1)
+
+})
+
+;[
+  Require.resolve('./resource/load.json'),
+  Require.resolve('./resource/load-0.js'),
+  Require.resolve('./resource/load-1.js'),
+  Require.resolve('./resource/load-2.js'),
+  Require.resolve('./resource/load-3.js'),
+  Require.resolve('./resource/load-4.cjs'),
+  Require.resolve('./resource/load-5.cjs'),
+  Require.resolve('./resource/load-6.cjs'),
+  Require.resolve('./resource/load-7.cjs')
+].forEach((path) => {
+
+  Test(`merge('${Path.relative(FolderPath, path)}')`, async (test) => {
+
+    let configuration = null
+    configuration = new Configuration({ 'b': 2 })
+    await configuration.merge(path)
+
+    test.is(configuration.get('b'), 2)
+    test.is(configuration.get('a'), 1)
+
+  })
+
+})
+
+Test('has(\'...\')', (test) => {
   test.true((new Configuration({ 'a': 1 })).has('a'))
 })
 
-Test('Configuration.get(string[, defaultValue])', (test) => {
+Test('get(\'...\'[, defaultValue])', (test) => {
 
   let configuration = new Configuration({ 'a': 1 })
 
@@ -85,7 +101,7 @@ Test('Configuration.get(string[, defaultValue])', (test) => {
 
 })
 
-Test('Configuration.set(string, value)', (test) => {
+Test('set(\'...\', value)', (test) => {
 
   let configuration = new Configuration({ 'a': 1 })
   configuration.set('b', 2)
@@ -108,27 +124,25 @@ Test('Configuration.getOption(option0, option1, option2)', (test) => {
 
 })
 
-Test('Configuration.getParameter(parameter0, parameter1, parameter2)', (test) => {
+Test('Configuration.getArgument(argument0, argument1, argument2)', (test) => {
 
-  let parameter0 = { 'a': '1' }
-  let parameter1 = [ 'b', 'c' ]
-  let parameter2 = { 'd': '4', 'c': '5' }
+  let argument0 = { 'a': '1' }
+  let argument1 = [ 'b', 'c' ]
+  let argument2 = { 'd': '4', 'c': '5' }
 
-  let actualValue = Configuration.getParameter(parameter0, parameter1, parameter2)
+  let actualValue = Configuration.getArgument(argument0, argument1, argument2)
   let expectedValue = [ 'a', '1', 'b', 'c', '5', 'd', '4' ]
-
-  test.log(actualValue)
 
   test.is(actualValue.length, 7)
   test.deepEqual(actualValue, expectedValue)
 
 })
 
-Test('Configuration.getParameter({ \'a\': 0 })', (test) => {
+Test('Configuration.getArgument({ \'a\': 0 })', (test) => {
 
-  let parameter0 = { 'a': 0 }
+  let argument0 = { 'a': 0 }
 
-  let actualValue = Configuration.getParameter(parameter0)
+  let actualValue = Configuration.getArgument(argument0)
   let expectedValue = [ 'a', 0 ]
 
   test.is(actualValue.length, 2)
@@ -136,11 +150,11 @@ Test('Configuration.getParameter({ \'a\': 0 })', (test) => {
 
 })
 
-Test('Configuration.getParameter({ \'a\': 1 })', (test) => {
+Test('Configuration.getArgument({ \'a\': 1 })', (test) => {
 
-  let parameter0 = { 'a': 1 }
+  let argument0 = { 'a': 1 }
 
-  let actualValue = Configuration.getParameter(parameter0)
+  let actualValue = Configuration.getArgument(argument0)
   let expectedValue = [ 'a', 1 ]
 
   test.is(actualValue.length, 2)

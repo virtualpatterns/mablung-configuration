@@ -1,3 +1,3 @@
 export default function() {
-  return { 'b': 2 }
+  return { 'a': 1 }
 }
