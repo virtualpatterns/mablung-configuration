@@ -15,6 +15,15 @@ Test('Configuration({ ... })', (test) => {
   test.is((new Configuration({ 'a': 1 })).get('a'), 1)
 })
 
+Test('root', async (test) => {
+
+  let configuration = null
+  configuration = new Configuration({ 'b': 2 })
+
+  test.deepEqual(configuration.root, { 'b': 2 })
+
+})
+
 Test('load({ ... })', async (test) => {
 
   let configuration = null
