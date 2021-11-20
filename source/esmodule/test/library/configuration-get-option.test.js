@@ -1,6 +1,5 @@
+import { Configuration } from '@virtualpatterns/mablung-configuration'
 import Test from 'ava'
-
-import { Configuration } from '../../index.js'
 
 class MyClass {
 
@@ -43,7 +42,7 @@ Test('getOption({ ... }, { ... }, { ... })', (test) => {
 
 })
 
-Test('getOption({ \'a\' }, { \'b\' }, { \'c\' })', (test) => {
+Test('getOption({ \'...\' }, { \'...\' }, { \'...\' })', (test) => {
 
   let option0 = { 'a': 0 }
   let option1 = { 'b': 1 }
@@ -60,7 +59,7 @@ Test('getOption({ \'a\' }, { \'b\' }, { \'c\' })', (test) => {
 
 })
 
-Test('getOption({ \'a\' }, { \'a\', \'b\' }, { \'a\', \'b\', \'c\' })', (test) => {
+Test('getOption({ \'...\' }, { \'...\', \'...\' }, { \'...\', \'...\', \'...\' })', (test) => {
 
   let option0 = { 'a': 0 }
   let option1 = { 'a': 1, 'b': 0 }
@@ -77,7 +76,7 @@ Test('getOption({ \'a\' }, { \'a\', \'b\' }, { \'a\', \'b\', \'c\' })', (test) =
 
 })
 
-Test('getOption({ \'a\': [ ... ] }, { \'a\': [ ... ] }, { \'a\': [ ... ] })', (test) => {
+Test('getOption({ \'...\': [ ... ] }, { \'...\': [ ... ] }, { \'...\': [ ... ] })', (test) => {
 
   let option0 = { 'a': [ 0 ] }
   let option1 = { 'a': [ 1 ] }
@@ -90,7 +89,7 @@ Test('getOption({ \'a\': [ ... ] }, { \'a\': [ ... ] }, { \'a\': [ ... ] })', (t
 
 })
 
-Test('getOption({ \'a\': [ async () => ... ] }, { \'a\': [ async () => ... ] }, { \'a\': [ async () => ... ] })', async (test) => {
+Test('getOption({ \'...\': [ async () => ... ] }, { \'...\': [ async () => ... ] }, { \'...\': [ async () => ... ] })', async (test) => {
 
   let option0 = { 'a': [ async () => 0 ] }
   let option1 = { 'a': [ async () => 0 ] }
@@ -106,7 +105,7 @@ Test('getOption({ \'a\': [ async () => ... ] }, { \'a\': [ async () => ... ] }, 
 
 })
 
-Test('getOption({ \'a\': [ class ] }, { \'a\': [ class ] }, { \'a\': [ class ] })', (test) => {
+Test('getOption({ \'...\': [ class ] }, { \'...\': [ class ] }, { \'...\': [ class ] })', (test) => {
 
   let option0 = { 'a': [ new MyClass(0) ] }
   let option1 = { 'a': [ new MyClass(0) ] }
@@ -125,7 +124,7 @@ Test('getOption({ \'a\': [ class ] }, { \'a\': [ class ] }, { \'a\': [ class ] }
 
 })
 
-Test('getOption({ \'a\' }, { \'b\' }, { \'a\', \'c\' })', (test) => {
+Test('getOption({ \'...\' }, { \'...\' }, { \'...\', \'...\' })', (test) => {
 
   let option0 = { 'a': 1 }
   let option1 = { 'b': 2 }

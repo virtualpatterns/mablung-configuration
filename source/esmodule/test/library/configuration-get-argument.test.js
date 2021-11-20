@@ -1,6 +1,5 @@
+import { Configuration } from '@virtualpatterns/mablung-configuration'
 import Test from 'ava'
-
-import { Configuration } from '../../index.js'
 
 Test('getArgument()', (test) => {
   test.deepEqual(Configuration.getArgument(), [])
@@ -10,11 +9,11 @@ Test('getArgument({ ... })', (test) => {
   test.deepEqual(Configuration.getArgument({ 'a': 0 }), [ 'a', 0 ])
 })
 
-Test('getArgument({ \'a\' }, { \'a\' })', (test) => {
-  test.deepEqual(Configuration.getArgument({ 'a': false }, { 'a': 1 }), [ 'a', 1 ])
+Test('getArgument({ \'...\': false }, { \'...\' })', (test) => {
+  test.deepEqual(Configuration.getArgument({ 'a': false }, { 'b': 1 }), [ 'b', 1 ])
 })
 
-Test('getArgument({ \'a\' }, { \'b\' })', (test) => {
+Test('getArgument({ \'...\': 0 }, { \'...\': 0 })', (test) => {
   test.deepEqual(Configuration.getArgument({ 'a': 0 }, { 'b': 0 }), [ 'a', 0, 'b', 0 ])
 })
 

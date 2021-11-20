@@ -1,7 +1,6 @@
+import { Configuration } from '@virtualpatterns/mablung-configuration'
 import Path from 'path'
 import Test from 'ava'
-
-import { Configuration } from '../../index.js'
 
 const FilePath = __filePath
 const FolderPath = Path.dirname(FilePath)
