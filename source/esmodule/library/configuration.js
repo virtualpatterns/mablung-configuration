@@ -2,67 +2,107 @@ import { Is } from '@virtualpatterns/mablung-is'
 import { isPlainObject as IsPlainObject } from 'is-plain-object'
 import Clone from 'clone'
 import FileSystem from 'fs-extra'
-import Path from 'path'
+import Json from 'json5'
 import Merge from 'deepmerge'
 import ObjectPath from 'object-path'
 
 class Configuration {
 
   constructor(root = {}) {
-    this._root = root
+    this.root = root
   }
 
-  get root() {
-    return this._root
+  async load(...argument) {
+    this.root = await this.constructor.load(...argument)
   }
 
-  async load(value) {
-    this._root = await Configuration.load(value)
-  }
-
-  async merge(value) {
-    this._root = Configuration.merge(this._root, await Configuration.load(value))
+  async merge(...argument) {
+    this.root = this.constructor.merge(this.root, await this.constructor.load(...argument))
   }
 
   has(...argument) {
-    return ObjectPath.has.apply(ObjectPath, [ this._root, ...argument ])
+    return ObjectPath.has.apply(ObjectPath, [ this.root, ...argument ])
   }
 
   get(...argument) {
-    return ObjectPath.get.apply(ObjectPath, [ this._root, ...argument ])
+    return ObjectPath.get.apply(ObjectPath, [ this.root, ...argument ])
   }
 
   set(...argument) {
-    return ObjectPath.set.apply(ObjectPath, [ this._root, ...argument ])
+    return ObjectPath.set.apply(ObjectPath, [ this.root, ...argument ])
   }
 
-  static async load(value) {
+  static async load(argument) {
 
-    if (Is.string(value)) {
+    switch (true) {
+      case Is.string(argument): {
 
-      let path = Path.resolve(value)
-
-      if (/^.+\.json5?$/i.test(path)) {
-        return FileSystem.readJson(path, { 'encoding': 'utf-8' })
-      }
-      else {
-
-        let module = await import(path)
-        let value = module.default
-
-        if (Is.functionOrAsyncFunction(value)) {
-          return value(this)
-        } else {
-          return value
+        switch (true) {
+          case /\.c?js$/i.test(argument): {
+  
+            let module = await import(argument)
+            let configuration = module.default || module
+    
+            if (Is.functionOrAsyncFunction(configuration)) {
+              return configuration(this)
+            } else {
+              return configuration
+            }
+    
+          }
+          default:
+            return Json.parse(await FileSystem.readFile(argument, { 'encoding': 'utf-8' }))
         }
 
       }
-
-    } else {
-      return value
+      default:
+        return argument
     }
 
   }
+
+  // static async load(value, throwOnError = true) {
+
+  //   switch (true) {
+  //     case Is.array(value):
+  //       return Promise.all(value.map((value) => this.load(value, throwOnError))).then((value) => value.reduce((accumulator, value) => this.merge(accumulator, value)))
+  //     case Is.string(value): {
+
+  //       try {
+
+  //         switch (true) {
+  //           case /\.c?js$/i.test(value): {
+    
+  //             let module = await import(value)
+  //             let value = module.default || module
+      
+  //             if (Is.functionOrAsyncFunction(value)) {
+  //               return value(this)
+  //             } else {
+  //               return value
+  //             }
+      
+  //           }
+  //           default:
+  //             return Json.parse(await FileSystem.readFile(value, { 'encoding': 'utf-8' }))
+  //         }
+
+  //       } catch (error) {
+
+  //         if (throwOnError) { 
+  //           throw error 
+  //         } else {
+  //           return {}
+  //         }
+          
+  //       }
+
+  //     }
+  //     default:
+  //       return value
+  //   }
+
+  // }
 
   static merge(...argument) {
     // Merge a set of objects

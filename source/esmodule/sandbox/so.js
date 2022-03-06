@@ -1,20 +1,19 @@
-import '@virtualpatterns/mablung-source-map-support/install'
+// import '@virtualpatterns/mablung-source-map-support/install'
 
-const Require = __require
+// // const Require = __require
 
-async function main() {
+// async function main() {
 
-  try {
+//   try {
 
-    let path = Require.resolve('./ta.js')
-    let module = await import(path)
+//     let path = Path.resolve(FolderPath, 'ta.js')
+//     let module = await import(path)
 
     
-  } catch (error) {
-    console.error(error)
-  }
+//   } catch (error) {
+//     console.error(error)
+//   }
 
-}
+// }
 
-main()
-
+// main()
