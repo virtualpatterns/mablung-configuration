@@ -38,6 +38,6 @@
     "@virtualpatterns/eslint-config-mablung-makefile-environment": "0.0.26-24",
     "@virtualpatterns/mablung-check-dependency": "0.0.26-107",
     "@virtualpatterns/mablung-makefile-environment": "0.0.26-70",
-    "ava": "^4.0.1"
+    "ava": "^4.1.0"
   }
 }
