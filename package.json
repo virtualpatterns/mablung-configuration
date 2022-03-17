@@ -24,8 +24,7 @@
   "type": "module",
   "version": "0.0.2-53",
   "dependencies": {
-    "@virtualpatterns/mablung-is": "0.0.1-63",
-    "@virtualpatterns/mablung-path": "^0.0.2-51",
+    "@virtualpatterns/mablung-is": "0.0.1-65",
     "clone": "^2.1.2",
     "deepmerge": "^4.2.2",
     "fs-extra": "^10.0.1",
@@ -34,10 +33,11 @@
     "object-path": "^0.11.8"
   },
   "devDependencies": {
-    "@virtualpatterns/babel-preset-mablung-makefile-environment": "0.0.26-31",
-    "@virtualpatterns/eslint-config-mablung-makefile-environment": "0.0.26-28",
-    "@virtualpatterns/mablung-check-dependency": "0.0.26-113",
-    "@virtualpatterns/mablung-makefile-environment": "0.0.26-78",
+    "@virtualpatterns/babel-preset-mablung-makefile-environment": "0.0.26-35",
+    "@virtualpatterns/eslint-config-mablung-makefile-environment": "0.0.26-32",
+    "@virtualpatterns/mablung-check-dependency": "0.0.26-121",
+    "@virtualpatterns/mablung-makefile-environment": "0.0.26-84",
+    "@virtualpatterns/mablung-path": "^0.0.2-53",
     "ava": "^4.1.0"
   }
 }
