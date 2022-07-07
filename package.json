@@ -22,7 +22,7 @@
     "url": "https://github.com/virtualpatterns/mablung-configuration"
   },
   "type": "module",
-  "version": "0.0.2-55",
+  "version": "0.0.2-56",
   "dependencies": {
     "@virtualpatterns/mablung-is": "0.0.1-67",
     "clone": "^2.1.2",
