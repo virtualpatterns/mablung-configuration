@@ -1,4 +1,4 @@
-import Path from 'path'
+import { Path } from '@virtualpatterns/mablung-path'
 
 import Configuration from './configuration/r'
 
