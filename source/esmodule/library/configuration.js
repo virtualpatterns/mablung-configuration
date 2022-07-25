@@ -1,10 +1,12 @@
 import { Is } from '@virtualpatterns/mablung-is'
 import { isPlainObject as IsPlainObject } from 'is-plain-object'
+import { Path } from '@virtualpatterns/mablung-path'
 import Clone from 'clone'
 import FileSystem from 'fs-extra'
 import Json from 'json5'
 import Merge from 'deepmerge'
 import ObjectPath from 'object-path'
+
 
 class Configuration {
 
@@ -40,7 +42,7 @@ class Configuration {
         switch (true) {
           case /\.c?js$/i.test(argument): {
   
-            let module = await import(argument)
+            let module = await import(Path.resolve(argument))
             let configuration = module.default || module
     
             if (Is.functionOrAsyncFunction(configuration)) {

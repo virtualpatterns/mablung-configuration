@@ -25,6 +25,7 @@
   "version": "0.0.2-57",
   "dependencies": {
     "@virtualpatterns/mablung-is": "0.0.1-67",
+    "@virtualpatterns/mablung-path": "^0.0.2-55",
     "clone": "^2.1.2",
     "deepmerge": "^4.2.2",
     "fs-extra": "^10.1.0",
@@ -37,7 +38,6 @@
     "@virtualpatterns/eslint-config-mablung-makefile-environment": "0.0.26-34",
     "@virtualpatterns/mablung-check-dependency": "0.0.26-125",
     "@virtualpatterns/mablung-makefile-environment": "0.0.26-89",
-    "@virtualpatterns/mablung-path": "^0.0.2-55",
-    "ava": "^4.3.0"
+    "ava": "^4.3.1"
   }
 }
